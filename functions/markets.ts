@@ -28,7 +28,7 @@ export const handler: Handler = async () => {
         const id1 = getAddress(pair.token1.id)
         const type = `spot`
 
-        accumulator[`${id0}_${id1}`] = {
+        accumulator[``] = {
           id: `${id0}_${id1}`,
           type: `${type}`,
           base_id: id0,
