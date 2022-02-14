@@ -4,7 +4,7 @@ import { createSuccessResponse, createServerErrorResponse } from './utils/respon
 import { getTopPairs } from './_shared'
 
 interface ReturnShape {
-
+  [tokenIds: string]: {
     id: string
     type: string
     base_id: string
@@ -17,7 +17,7 @@ interface ReturnShape {
     base_volume: string
     quote_volume: string
   }
-
+}
 
 export const handler: Handler = async () => {
   try {
@@ -28,7 +28,7 @@ export const handler: Handler = async () => {
         const id1 = getAddress(pair.token1.id)
         const type = `spot`
 
-        accumulator = {
+        accumulator [`id: ${id0}_${id1}`] = {
           id: `${id0}_${id1}`,
           type: `${type}`,
           base_id: id0,
@@ -43,8 +43,8 @@ export const handler: Handler = async () => {
         }
 
         return accumulator
-      },
-  
+      }, {})
+    )
   } catch (error) {
     return createServerErrorResponse(error)
   }
