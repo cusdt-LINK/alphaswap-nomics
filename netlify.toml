@@ -1,0 +1,29 @@
+[build]
+  functions = "./functions"
+  publish = "functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+#include all node modules in all functions
+
+  external_node_modules = ["@ethersproject/address", "apollo-cache-inmemory", "apollo-client", "apollo-link-http", 
+"bignumber.js", "graphql", "graphql-tag", "node-fetch", "serverless-offline", "@types/aws-lambda"]
+
+#include all files in all functions
+
+included_files = ["functions/**"]
+
+[dev]
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/orders/snapshot"
+  to = "/.netlify/functions/orders-snapshot"
+  status = 200
+  force = true
